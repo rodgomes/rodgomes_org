@@ -1,16 +1,18 @@
-defmodule RodgomesOrg.Router do
-  use Plug.Router
+defmodule RodgomesOrg do
+  use Application
 
-  plug Plug.Logger
-  plug :match
-  plug :dispatch
+  def start( _type, _args ) do
+    import Supervisor.Spec, warn: false
 
-  get "/" do
-    send_resp(conn, 200, "hey from index page!")
+    children = [
+      worker(__MODULE__, [], function: :run)
+    ]
+
+    opts = [strategy: :one_for_one, name: RodgomesOrg.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 
-  match _ do
-    send_resp(conn, 404, "oops")
+  def run do
+    { :ok, _ } = Plug.Adapters.Cowboy.http RodgomesOrg.Router, []
   end
-
 end
