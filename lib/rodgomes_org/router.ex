@@ -2,15 +2,10 @@ defmodule RodgomesOrg.Router do
   use Plug.Router
   require EEx
 
+  plug Plug.Static,  at: "/public", from: :rodgomes_org
   plug Plug.Logger
   plug :match
   plug :dispatch
-
-  plug Plug.Static,
-          at: "/public",
-          from: :rodgomes_org,
-          only: ~w(static) ++ [prefix: "prefix"]
-
 
   EEx.function_from_file :defp, :template_index, "templates/index.html.eex"
 
