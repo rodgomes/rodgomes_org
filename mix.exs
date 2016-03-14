@@ -14,7 +14,7 @@ defmodule RodgomesOrg.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :cowboy, :plug],
+    [applications: [:logger, :cowboy, :plug, :edeliver],
     mod: {RodgomesOrg, []}]
   end
 
@@ -29,6 +29,8 @@ defmodule RodgomesOrg.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:cowboy, "~> 1.0.4"},
-     {:plug, "~> 1.1.2"}]
+     {:plug, "~> 1.1.2"},
+     {:edeliver, ">= 1.1.1"},
+     {:exrm, ">= 1.0.2"}]
   end
 end
