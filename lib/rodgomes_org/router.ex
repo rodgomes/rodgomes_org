@@ -3,6 +3,7 @@ defmodule RodgomesOrg.Router do
   require EEx
 
   plug Plug.Static,  at: "/public", from: :rodgomes_org
+  plug Plug.Static,  at: "/", from: :rodgomes_org, only: ~w(favicon.ico robots.txt)
   plug Plug.Logger
   plug :match
   plug :dispatch
