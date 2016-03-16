@@ -28,6 +28,3 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
-
-config :logger, level: :info
-config :rodgomes_org, :analytics_code, System.get_env("ANALYTICS_CODE")

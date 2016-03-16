@@ -15,7 +15,8 @@ defmodule RodgomesOrg.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger, :cowboy, :plug, :edeliver],
-    mod: {RodgomesOrg, []}]
+    mod: {RodgomesOrg, []},
+    env: [analytics_code: System.get_env("ANALYTICS_CODE")]]
   end
 
   # Dependencies can be Hex packages:
