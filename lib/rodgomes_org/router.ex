@@ -1,6 +1,7 @@
 defmodule RodgomesOrg.Router do
   use Plug.Router
   require EEx
+  require Logger
 
   plug Plug.Static,  at: "/public", from: :rodgomes_org
   plug Plug.Static,  at: "/", from: :rodgomes_org, only: ~w(favicon.ico robots.txt)
@@ -12,9 +13,11 @@ defmodule RodgomesOrg.Router do
 
   get "/" do
 
+    code = Application.get_env(:rodgomes_org, :analytics_code)
+    Logger.info "using analytics_code from env variable #{inspect code}"
     conn
     |> put_resp_content_type("text/html")
-    |> send_resp(200, template_index(Application.get_env(:rodgomes_org, :analytics_code)))
+    |> send_resp(200, template_index(code))
   end
 
   match _ do
