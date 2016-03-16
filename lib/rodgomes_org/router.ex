@@ -8,13 +8,13 @@ defmodule RodgomesOrg.Router do
   plug :match
   plug :dispatch
 
-  EEx.function_from_file :defp, :template_index, "templates/index.html.eex"
+  EEx.function_from_file :defp, :template_index, "templates/index.html.eex", [:analytics_code]
 
   get "/" do
 
     conn
     |> put_resp_content_type("text/html")
-    |> send_resp(200, template_index())
+    |> send_resp(200, template_index(Application.get_env(:rodgomes_org, :analytics_code)))
   end
 
   match _ do
